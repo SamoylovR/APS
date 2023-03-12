@@ -1,73 +1,48 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MOGILEVZAGS.DataAccess;
+using MOGILEVZAGS.DataAccess.Models;
 using System.Data.SqlClient;
 
 namespace MOGILEVZAGS.Pages.Clients
 {
     public class CreateModel : PageModel
     {
-        public ClientInfo clientInfo = new ClientInfo();
+        private readonly DBContext _dbContext;
+
+        public Client clientInfo = new Client();
+
         public String errorMessage = "";
         public String successMessage = "";
+
+        public CreateModel(DBContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public void OnGet()
         {
         }
 
-        public void OnPost()
+        public async Task OnPost()
         {
-            clientInfo.name = Request.Form["name"];
-            clientInfo.surname = Request.Form["surname"];
-            clientInfo.secondname = Request.Form["secondname"];
-            clientInfo.email = Request.Form["email"];
-            clientInfo.phone = Request.Form["phone"];
+            clientInfo.Name = Request.Form["name"];
+            clientInfo.Surname = Request.Form["surname"];
+            clientInfo.SecondName = Request.Form["secondname"];
+            clientInfo.Email = Request.Form["email"];
+            clientInfo.Phone = Request.Form["phone"];
 
+            clientInfo.TypeOfOperation = "Marriage";
 
-
-            if (clientInfo.name.Length == 0 || clientInfo.surname.Length == 0 ||
-                clientInfo.secondname.Length == 0 || clientInfo.email.Length == 0 ||
-                clientInfo.phone.Length == 0)
+            var marriage = new Marriage
             {
-                errorMessage = "Все поля должны быть заполнены!";
-                return;
+                Client = clientInfo,
+            };
 
-            }
-
-            try
-            {
-                String connectionString = "Data Source=ANRLT\\SQLEXPRESS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string sql = "USE [Client]\r\n INSERT INTO dbo.Clients " + "(name,surname,secondname,email, phone) VALUES " +
-                        "(@name,@surname,@secondname,@email, @phone);";
-
-                    using (SqlCommand command =new SqlCommand(sql, connection))
-                    {
-                        command.Parameters.AddWithValue("name", clientInfo.name);
-                        command.Parameters.AddWithValue("surname", clientInfo.surname);
-                        command.Parameters.AddWithValue("secondname", clientInfo.secondname);
-                        command.Parameters.AddWithValue("email", clientInfo.email);
-                        command.Parameters.AddWithValue("phone", clientInfo.phone);
-                        //command.Parameters.AddWithValue("birthday", clientInfo.birthday);
-
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }  
-            catch (Exception ex)
-            {
-                errorMessage = ex.Message;
-                return;
-                
-            }
-
-
-            clientInfo.name = "";  clientInfo.surname = ""; clientInfo.secondname = ""; clientInfo.email = "";
-                 clientInfo.phone = "";
-            successMessage = "New client Added Correctly";
+            await _dbContext.Marriages.AddAsync(marriage);
+            await _dbContext.SaveChangesAsync();
 
             Response.Redirect("/Clients/Index");
-
         }
     }
 }
