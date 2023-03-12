@@ -1,52 +1,37 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Data.SqlClient;
-using System.Security.Cryptography.X509Certificates;
-
+using Microsoft.EntityFrameworkCore;
+using MOGILEVZAGS.DataAccess;
+using MOGILEVZAGS.DataAccess.Models;
+using MOGILEVZAGS.DataAccess.Services;
 
 namespace MOGILEVZAGS.Pages.Clients
 {
     public class IndexModel : PageModel
     {
-        public List<ClientInfo> ListClients = new List<ClientInfo>();
-        public void OnGet()
+        private readonly IClientsService _clientService;
+        private readonly ILogger<IndexModel> _logger;
+
+        public IndexModel(
+            IClientsService clientService,
+            ILogger<IndexModel> logger)
+        {
+            _clientService = clientService;
+            _logger = logger;
+        }
+
+        public List<Client> ListClients = new List<Client>();
+
+        public async Task OnGet()
         {
             try
             {
-                String connectionString = "Data Source=ANRLT\\SQLEXPRESS;Initial Catalog=Client;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open(); 
+                ListClients = await _clientService.GetAllClientsAsync();
 
-                    String sql = "USE [Client]\r\nSELECT * FROM dbo.Clients";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                   
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                ClientInfo clientInfo = new ClientInfo();
-                                clientInfo.id = "" + reader.GetInt32(0);
-                                clientInfo.name = reader.GetString(1);
-                                clientInfo.surname = reader.GetString(2);
-                                clientInfo.secondname = reader.GetString(3);
-                                clientInfo.email = reader.GetString(4);
-                                clientInfo.phone = reader.GetString(5);
-                                //birthday = reader.GetDateTime(6),
-                                clientInfo.created_at = reader.GetDateTime(7).ToString();
-                                clientInfo.typeOfOperation = reader.GetString(8);
-                                //
-                                ListClients.Add(clientInfo);
-                            }
-                        }
-                    }
-                }
             }
             catch (Exception ex)
             {
 
-                Console.WriteLine("Exception  " + ex.ToString());
+                _logger.LogError("Exception  " + ex.ToString());
             }
         }
     }
