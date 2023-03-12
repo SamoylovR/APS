@@ -9,7 +9,7 @@ namespace MOGILEVZAGS.DataAccess.Models
 
         public string Name { get; set; }
 
-        public string Surname { get; set; }
+        public string Patronymic { get; set; }
 
         public string SecondName { get; set; }
 

@@ -16,6 +16,16 @@ namespace MOGILEVZAGS.DataAccess.Services
             _logger = logger;
         }
 
+        public async Task<List<Client>> GetDivorcedClientAsync() 
+        {
+            return await _dbContext.Clients.Where(item=>item.TypeOfOperation == "Divorce").ToListAsync();
+        }
+
+        public async Task<List<Client>> GetMarriagedClientAsync()
+        {
+            return await _dbContext.Clients.Where(item => item.TypeOfOperation == "Marriage").ToListAsync();
+        }
+
         public async Task<List<Client>> GetAllClientsAsync()
         {
             return await _dbContext.Clients.ToListAsync();
