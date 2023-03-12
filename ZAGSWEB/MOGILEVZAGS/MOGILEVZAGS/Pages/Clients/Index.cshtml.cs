@@ -13,7 +13,7 @@ namespace MOGILEVZAGS.Pages.Clients
         {
             try
             {
-                String connectionString = "Data Source=ANRLT\\SQLEXPRESS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                String connectionString = "Data Source=NEKET\\SQL1;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -60,7 +60,7 @@ namespace MOGILEVZAGS.Pages.Clients
         public String surname;
         public String secondname;
         public String email;
-        public String phone;
+        public String? phone;
         //public DateTime birthday;
         public String created_at;
     }

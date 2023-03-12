@@ -34,7 +34,7 @@ namespace MOGILEVZAGS.Pages.Clients
 
             try
             {
-                String connectionString = "Data Source=ANRLT\\SQLEXPRESS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                String connectionString = "Data Source=NEKET\\SQL1;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
