@@ -46,5 +46,3 @@ namespace MOGILEVZAGS.Pages.Clients
         }
     }
 }
-
-

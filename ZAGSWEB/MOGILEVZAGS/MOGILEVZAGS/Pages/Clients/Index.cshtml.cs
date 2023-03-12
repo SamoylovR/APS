@@ -26,6 +26,7 @@ namespace MOGILEVZAGS.Pages.Clients
             try
             {
                 ListClients = await _clientService.GetAllClientsAsync();
+
             }
             catch (Exception ex)
             {
@@ -45,5 +46,6 @@ namespace MOGILEVZAGS.Pages.Clients
         public String phone;
         //public DateTime birthday;
         public String created_at;
+        public String typeOfOperation;
     }
 }

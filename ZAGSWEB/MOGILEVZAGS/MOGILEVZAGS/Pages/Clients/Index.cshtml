@@ -6,4 +6,33 @@
 <br>
 <h2>Предварительная запись на регистрацию брака прямо на веб-сайте.</h2>
 <a class='btn btn-primary btn-sm' href='/Clients/Create'>Оформить запись</a>
-
+<table class="table">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отчество</th>
+            <th>Телефон</th>
+            <th>Дата создания заявки</th>
+            <th>Тип заявки</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListClients)
+        {
+            <tr>
+                <td>@item.name</td>
+                <td>@item.secondname</td>
+                <td>@item.surname</td>
+                <td>@item.phone</td>
+                <td>@item.created_at</td>
+                <th>@item.typeOfOperation</th>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Clients/Edit?id=@item.id">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Clients/Delete?id=@item.id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
