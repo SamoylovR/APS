@@ -13,12 +13,12 @@ namespace MOGILEVZAGS.Pages.Clients
         {
             try
             {
-                String connectionString = "Data Source=ANRLT\\SQLEXPRESS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                String connectionString = "Data Source=ANRLT\\SQLEXPRESS;Initial Catalog=Client;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    connection.Open();
-                    
-                    String sql = "USE [Client]\r\nSELECT * FROM dbo.Clients";   
+                    connection.Open(); 
+
+                    String sql = "USE [Client]\r\nSELECT * FROM dbo.Clients";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                    
                     {
@@ -26,19 +26,17 @@ namespace MOGILEVZAGS.Pages.Clients
                         {
                             while (reader.Read())
                             {
-                                ClientInfo clientInfo = new ClientInfo  
-                                {
-                                    id = "" + reader.GetInt32(0),
-                                    name = reader.GetString(1),
-                                    surname = reader.GetString(2),
-                                    secondname = reader.GetString(3),
-                                    email = reader.GetString(4),
-                                    phone = reader.GetString(5),
-                                    //birthday = reader.GetDateTime(6),
-                                    created_at = reader.GetDateTime(7).ToString()
-                                };
-
-
+                                ClientInfo clientInfo = new ClientInfo();
+                                clientInfo.id = "" + reader.GetInt32(0);
+                                clientInfo.name = reader.GetString(1);
+                                clientInfo.surname = reader.GetString(2);
+                                clientInfo.secondname = reader.GetString(3);
+                                clientInfo.email = reader.GetString(4);
+                                clientInfo.phone = reader.GetString(5);
+                                //birthday = reader.GetDateTime(6),
+                                clientInfo.created_at = reader.GetDateTime(7).ToString();
+                                clientInfo.typeOfOperation = reader.GetString(8);
+                                //
                                 ListClients.Add(clientInfo);
                             }
                         }
@@ -63,8 +61,6 @@ namespace MOGILEVZAGS.Pages.Clients
         public String phone;
         //public DateTime birthday;
         public String created_at;
+        public String typeOfOperation;
     }
-
-
-
 }

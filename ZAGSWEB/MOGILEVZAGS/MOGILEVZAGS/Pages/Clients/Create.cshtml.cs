@@ -22,14 +22,12 @@ namespace MOGILEVZAGS.Pages.Clients
             clientInfo.phone = Request.Form["phone"];
 
 
-
             if (clientInfo.name.Length == 0 || clientInfo.surname.Length == 0 ||
                 clientInfo.secondname.Length == 0 || clientInfo.email.Length == 0 ||
                 clientInfo.phone.Length == 0)
             {
                 errorMessage = "Все поля должны быть заполнены!";
                 return;
-
             }
 
             try
@@ -38,8 +36,8 @@ namespace MOGILEVZAGS.Pages.Clients
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "USE [Client]\r\n INSERT INTO dbo.Clients " + "(name,surname,secondname,email, phone) VALUES " +
-                        "(@name,@surname,@secondname,@email, @phone);";
+                    string sql = "USE [Client]\r\n INSERT INTO dbo.Clients " + "(name,surname,secondname,email, phone,TypeOfOperation) VALUES " +
+                        "(@name,@surname,@secondname,@email, @phone,@TypeOfOperation);";
 
                     using (SqlCommand command =new SqlCommand(sql, connection))
                     {
@@ -48,6 +46,7 @@ namespace MOGILEVZAGS.Pages.Clients
                         command.Parameters.AddWithValue("secondname", clientInfo.secondname);
                         command.Parameters.AddWithValue("email", clientInfo.email);
                         command.Parameters.AddWithValue("phone", clientInfo.phone);
+                        command.Parameters.AddWithValue("TypeOfOperation","Marriage");
                         //command.Parameters.AddWithValue("birthday", clientInfo.birthday);
 
                         command.ExecuteNonQuery();
@@ -71,5 +70,3 @@ namespace MOGILEVZAGS.Pages.Clients
         }
     }
 }
-
-
