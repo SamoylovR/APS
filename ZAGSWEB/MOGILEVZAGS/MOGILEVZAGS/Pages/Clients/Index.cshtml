@@ -14,6 +14,7 @@
             <th>Отчество</th>
             <th>Телефон</th>
             <th>Дата создания заявки</th>
+            <th>Тип заявки</th>
             <th>Действие</th>
         </tr>
     </thead>
@@ -26,6 +27,7 @@
                 <td>@item.surname</td>
                 <td>@item.phone</td>
                 <td>@item.created_at</td>
+                <th>@item.typeOfOperation</th>
                 <td>
                     <a class="btn btn-primary btn-sm" href="/Clients/Edit?id=@item.id">Edit</a>
                     <a class="btn btn-danger btn-sm" href="/Clients/Delete?id=@item.id">Delete</a>
@@ -34,4 +36,3 @@
         }
     </tbody>
 </table>
-
