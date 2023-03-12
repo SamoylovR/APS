@@ -1,0 +1,35 @@
+﻿@page
+@model MOGILEVZAGS.Pages.Employees.IndexModel
+@{
+}
+<h2>Список всех сотрудников</h2>
+<a class='btn btn-primary btn-sm' href='/Employees/Create'>Добавить сотрудника</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Должность</th>
+            <th>Местоположение</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListClients)
+        {
+            <tr>
+                <td>@item.Patronymic</td>
+                <td>@item.Name</td>
+                <td>@item.SecondName</td>
+                <td>@item.Positions.FirstOrDefault().Name</td>
+                <td>@item.Location.LocationName</td>
+                <td>
+                    <form method="post">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <input type="hidden" value="@item.Id">
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
