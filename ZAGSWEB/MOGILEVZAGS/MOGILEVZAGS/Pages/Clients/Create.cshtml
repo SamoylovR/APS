@@ -1,0 +1,80 @@
+﻿@page
+@model MOGILEVZAGS.Pages.Clients.CreateModel
+@{
+}
+
+<br />
+<h2>Регистрация брака</h2>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.errorMessage</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+}
+
+
+
+<form method="post">
+    <div class="row mb-3"> 
+      <label class="col-sm-3 col-form-label">Имя</label>
+      <div class="col-sm-6">
+          <input type="text" class="form-control"  name="name" value="@Model.clientInfo.name">
+      </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Фамилия</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="surname" value="@Model.clientInfo.surname">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Отчество</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="secondname" value="@Model.clientInfo.secondname">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="Email" value="@Model.clientInfo.email">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Мобильный телефон</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="phone" value="@Model.clientInfo.phone">
+        </div>
+    </div>
+    @*<div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Дата рождения</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="birhday" value="@Model.clientInfo.birthday">
+        </div>*@
+    </div>
+
+
+    @if (Model.successMessage.Length > 0)
+    {
+        <div class="row mb-3">
+           <div class="col-sm-9">
+             <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+              <strong>@Model.successMessage</strong>
+              <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+             </div>
+            </div>
+       </div>
+    }
+
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+        <button type="submit" class="btn btn-primary">Подтвердить</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a  class="btn btn-outline-primary" href="/" role="button">Отменить</a>
+        </div>
+        </div>
+        
+        </form>
+       
