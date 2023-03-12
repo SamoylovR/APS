@@ -23,7 +23,7 @@ namespace MOGILEVZAGS.Pages.Clients
         public void OnGet()
         {
         }
-
+        
         public async Task OnPost()
         {
             clientInfo.Name = Request.Form["name"];

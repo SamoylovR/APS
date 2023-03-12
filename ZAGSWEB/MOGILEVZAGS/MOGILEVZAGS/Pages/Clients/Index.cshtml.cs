@@ -43,7 +43,7 @@ namespace MOGILEVZAGS.Pages.Clients
         public String surname;
         public String secondname;
         public String email;
-        public String phone;
+        public String? phone;
         //public DateTime birthday;
         public String created_at;
         public String typeOfOperation;
