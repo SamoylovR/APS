@@ -31,7 +31,7 @@ namespace MOGILEVZAGS.DataAccess
                 {
                     Id = 1,
                     Name = "admin",
-                    Surname = "admin",
+                    Patronymic = "admin",
                     SecondName = "asdf",
                     Email = "asdf@asdfg.com",
                     Phone = "+3751233456",
@@ -45,7 +45,7 @@ namespace MOGILEVZAGS.DataAccess
 
         public DbSet<Client> Clients { get; set; }
 
-        public DbSet<Divorce> Divorses { get; set; }
+        public DbSet<Divorce> Divorсes { get; set; }
 
         public DbSet<Marriage> Marriages { get; set; }
 

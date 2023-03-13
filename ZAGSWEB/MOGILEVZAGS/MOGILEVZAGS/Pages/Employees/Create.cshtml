@@ -1,10 +1,9 @@
 ﻿@page
-@model MOGILEVZAGS.Pages.Clients.CreateModel
+@model MOGILEVZAGS.Pages.Employees.CreateModel
 @{
 }
 
-<br />
-<h2>Регистрация брака</h2>
+<h2>Добавление сотрудника</h2>
 
 @if (Model.errorMessage.Length > 0)
 {
@@ -20,38 +19,45 @@
     <div class="row mb-3"> 
       <label class="col-sm-3 col-form-label">Имя</label>
       <div class="col-sm-6">
-          <input type="text" class="form-control"  name="name" value="@Model.clientInfo.Name">
+          <input type="text" class="form-control"  name="name" value="@Model.employeeInfo.Name">
       </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Фамилия</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="surname" value="@Model.clientInfo.Patronymic">
+            <input type="text" class="form-control" name="patronymic" value="@Model.employeeInfo.Patronymic">
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Отчество</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="secondname" value="@Model.clientInfo.SecondName">
+            <input type="text" class="form-control" name="secondname" value="@Model.employeeInfo.SecondName">
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Email</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="Email" value="@Model.clientInfo.Email">
+            <input type="text" class="form-control" name="Email" value="@Model.employeeInfo.Email">
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Мобильный телефон</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="phone" value="@Model.clientInfo.Phone">
+            <input type="text" class="form-control" name="phone" value="@Model.employeeInfo.Phone">
         </div>
     </div>
-    @*<div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Дата рождения</label>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Местоположение пункта</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="birhday" value="@Model.clientInfo.birthday">
-        </div>*@
+            <input type="text" class="form-control" name="location" value="@Model.employeeInfo.Location">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Должность</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="position">
+        </div>
+    </div>
     
 
 
@@ -77,4 +83,3 @@
         </div>
         
         </form>
-       

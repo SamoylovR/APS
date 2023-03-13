@@ -25,8 +25,7 @@ namespace MOGILEVZAGS.Pages.Clients
         {
             try
             {
-                ListClients = await _clientService.GetAllClientsAsync();
-
+                ListClients = await _clientService.GetMarriagedClientAsync();
             }
             catch (Exception ex)
             {
@@ -34,18 +33,10 @@ namespace MOGILEVZAGS.Pages.Clients
                 _logger.LogError("Exception  " + ex.ToString());
             }
         }
-    }
 
-    public class ClientInfo
-    {
-        public String id;
-        public String name;
-        public String surname;
-        public String secondname;
-        public String email;
-        public String? phone;
-        //public DateTime birthday;
-        public String created_at;
-        public String typeOfOperation;
+        public async Task OnPost(int id)
+        {
+            await _clientService.DeleteClientById(id);
+        }
     }
 }
