@@ -21,6 +21,12 @@
                 <td>@item.Name</td>
                 <td>@item.SecondName</td>
                 <th>@item.TypeOfOperation</th>
+                <td>
+                    <form method="post">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <input type="hidden" name="id" value="@item.Id">
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
