@@ -1,0 +1,39 @@
+﻿@page
+@model MOGILEVZAGS.Pages.Auth.LoginModel
+@{
+}
+
+
+<div class="container border" style="padding: 20px">
+    <form method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="userModel.Login"></label>
+            </div>
+            <div class="col-5">
+                <input type="text" asp-for="userModel.Login" class="form-control" />
+            </div>
+            <span class="text-danger" asp-validation-for="userModel.Login"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="userModel.Password"></label>
+            </div>
+            <div class="col-5">
+                <input type="password" asp-for="userModel.Password" class="form-control" />
+            </div>
+            <span class="text-danger" asp-validation-for="userModel.Password"></span>
+        </div>
+
+        <div>
+            <div class="col-2">
+                <input type="submit" class="btn btn-primary" value="Login"/>
+            </div>
+            <div class="col-5">
+                <a class="btn btn-secondary" asp-area="" asp-page="/Auth/Register">Register</a>
+            </div>
+        </div>
+    </form>
+</div>

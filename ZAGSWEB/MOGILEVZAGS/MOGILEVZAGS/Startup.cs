@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOGILEVZAGS.DataAccess;
 using MOGILEVZAGS.DataAccess.Services;
+using System.Security.Claims;
 
 namespace MOGILEVZAGS
 {
@@ -32,9 +33,21 @@ namespace MOGILEVZAGS
             //        options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
             //    });
 
-            //services
-            //    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //    .AddCookie();
+            services
+                .AddAuthentication("ZagsCookie")
+                .AddCookie(
+                    "ZagsCookie", options =>
+                    {
+                        options.Cookie.Name = "ZagsCookie";
+                        options.LoginPath = "/Auth/Login";
+                        options.AccessDeniedPath = "/Auth/AccessDenied";
+                    });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("MustBeAdmin",
+                        policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+            });
 
             services.AddRazorPages();
         }
@@ -56,12 +69,13 @@ namespace MOGILEVZAGS
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
             });
-
-            //app.UseAuthorization();
         }
     }
 }
