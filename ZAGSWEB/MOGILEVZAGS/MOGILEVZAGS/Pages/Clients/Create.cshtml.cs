@@ -27,7 +27,7 @@ namespace MOGILEVZAGS.Pages.Clients
         public async Task OnPost()
         {
             clientInfo.Name = Request.Form["name"];
-            clientInfo.Surname = Request.Form["surname"];
+            clientInfo.Patronymic = Request.Form["surname"];
             clientInfo.SecondName = Request.Form["secondname"];
             clientInfo.Email = Request.Form["email"];
             clientInfo.Phone = Request.Form["phone"];

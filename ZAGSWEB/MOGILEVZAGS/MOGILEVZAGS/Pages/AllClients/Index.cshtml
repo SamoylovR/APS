@@ -1,0 +1,27 @@
+﻿@page
+@model MOGILEVZAGS.Pages.AllClients.IndexModel
+@{
+}
+<h2>Список всех клиентов.</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>            
+            <th>Отчество</th>
+            <th>Тип заявки</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListClients)
+        {
+            <tr>                
+                <td>@item.Patronymic</td>
+                <td>@item.Name</td>
+                <td>@item.SecondName</td>
+                <th>@item.TypeOfOperation</th>
+            </tr>
+        }
+    </tbody>
+</table>

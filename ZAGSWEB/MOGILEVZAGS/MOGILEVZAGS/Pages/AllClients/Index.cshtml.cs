@@ -5,15 +5,15 @@ using MOGILEVZAGS.DataAccess.Services;
 using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
 
-
-namespace MOGILEVZAGS.Pages.Client1
+namespace MOGILEVZAGS.Pages.AllClients
 {
-    public class Index1Model : PageModel
+    public class IndexModel : PageModel
     {
+
         private readonly IClientsService _clientService;
         private readonly ILogger<IndexModel> _logger;
 
-        public Index1Model(
+        public IndexModel(
             IClientsService clientService,
             ILogger<IndexModel> logger)
         {
@@ -22,12 +22,11 @@ namespace MOGILEVZAGS.Pages.Client1
         }
 
         public List<Client> ListClients = new List<Client>();
-
         public async Task OnGet()
         {
             try
             {
-                ListClients = await _clientService.GetDivorcedClientAsync();
+                ListClients = await _clientService.GetAllClientsAsync();
 
             }
             catch (Exception ex)
@@ -35,11 +34,6 @@ namespace MOGILEVZAGS.Pages.Client1
 
                 _logger.LogError("Exception  " + ex.ToString());
             }
-        }
-
-        public async Task OnPost(int id)
-        {
-            await _clientService.DeleteClientById(id);
         }
     }
 }

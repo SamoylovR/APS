@@ -1,77 +1,49 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MOGILEVZAGS.Pages.Clients;
+using MOGILEVZAGS.DataAccess;
+using MOGILEVZAGS.DataAccess.Models;
 using System.Data.SqlClient;
 
 namespace MOGILEVZAGS.Pages.Client1
 {
     public class Create1Model : PageModel
     {
-        public Client1Info client1Info = new Client1Info();
+        private readonly DBContext _dbContext;
+
+        public Client clientInfo = new Client();
+
         public String errorMessage = "";
         public String successMessage = "";
+
+        public Create1Model(DBContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public void OnGet()
         {
 
         }
 
-        public void OnPost()
+        public async Task OnPost()
         {
-            client1Info.name = Request.Form["name"];
-            client1Info.surname = Request.Form["surname"];
-            client1Info.secondname = Request.Form["secondname"];
-            client1Info.email = Request.Form["email"];
-            client1Info.phone = Request.Form["phone"];
+            clientInfo.Name = Request.Form["name"];
+            clientInfo.Patronymic = Request.Form["surname"];
+            clientInfo.SecondName = Request.Form["secondname"];
+            clientInfo.Email = Request.Form["email"];
+            clientInfo.Phone = Request.Form["phone"];
 
+            clientInfo.TypeOfOperation = "Divorce";
 
-
-            if (client1Info.name.Length == 0 || client1Info.surname.Length == 0 ||
-                client1Info.secondname.Length == 0 || client1Info.email.Length == 0 ||
-                client1Info.phone.Length == 0)
+            var divorce = new Divorce
             {
-                errorMessage = "Все поля должны быть заполнены!";
-                return;
+                Client = clientInfo,
+            };
 
-            }
+            await _dbContext.Divorсes.AddAsync(divorce);
+            await _dbContext.SaveChangesAsync();
 
-            try
-            {
-                String connectionString = "Data Source=NEKET\\SQL1;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string sql = "USE [Client]\r\n INSERT INTO dbo.Clients " + "(name,surname,secondname,email, phone) VALUES " +
-                        "(@name,@surname,@secondname,@email, @phone);";
-
-                    using (SqlCommand command =new SqlCommand(sql, connection))
-                    {
-                        command.Parameters.AddWithValue("name", client1Info.name);
-                        command.Parameters.AddWithValue("surname", client1Info.surname);
-                        command.Parameters.AddWithValue("secondname", client1Info.secondname);
-                        command.Parameters.AddWithValue("email", client1Info.email);
-                        command.Parameters.AddWithValue("phone", client1Info.phone);
-                        //command.Parameters.AddWithValue("birthday", clientInfo.birthday);
-
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }  
-            catch (Exception ex)
-            {
-                errorMessage = ex.Message;
-                return;
-                
-            }
-
-
-            client1Info.name = "";  client1Info.surname = ""; client1Info.secondname = ""; client1Info.email = "";
-                 client1Info.phone = "";
-            successMessage = "New client Added Correctly";
-
-            Response.Redirect("/Client1/Index");
+            Response.Redirect("/Clients/Index");
 
         }
     }
 }
-
-

@@ -16,9 +16,36 @@ namespace MOGILEVZAGS.DataAccess.Services
             _logger = logger;
         }
 
+        public async Task<List<Client>> GetDivorcedClientAsync() 
+        {
+            return await _dbContext.Clients.Where(item=>item.TypeOfOperation == "Divorce").ToListAsync();
+        }
+
+        public async Task<List<Client>> GetMarriagedClientAsync()
+        {
+            return await _dbContext.Clients.Where(item => item.TypeOfOperation == "Marriage").ToListAsync();
+        }
+
         public async Task<List<Client>> GetAllClientsAsync()
         {
             return await _dbContext.Clients.ToListAsync();
+        }
+
+        public async Task DeleteClientById(int id)
+        {
+            var clientToDelete = await _dbContext.Clients
+                .FirstOrDefaultAsync(item => item.Id == id);
+
+            if (clientToDelete is not null)
+            {
+                _dbContext.Clients.Remove(clientToDelete);
+
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                _logger.LogWarning("Trying to delete unexisting entity");
+            }
         }
     }
 }

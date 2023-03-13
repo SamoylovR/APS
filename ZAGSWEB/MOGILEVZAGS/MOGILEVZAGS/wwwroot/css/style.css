@@ -619,3 +619,9 @@ body {
 .link-decor a{
 text-decoration: none;
 }
+
+.prices-table {
+    border: 2px solid black;
+    border-collapse: collapse;
+
+}
