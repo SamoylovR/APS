@@ -19,6 +19,7 @@
         </tr>
     </thead>
     <tbody>
+
         @foreach (var item in Model.ListClients)
         {
             <tr>
@@ -29,7 +30,10 @@
                 <td>@item.CreatedAt</td>
                 <th>@item.TypeOfOperation</th>
                 <td>
-                    <a class="btn btn-danger btn-sm" href="/Clients/Delete?id=@item.Id">Delete</a>
+                    <form method="post">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <input type="hidden" name="id" value="@item.Id">
+                    </form>
                 </td>
             </tr>
         }

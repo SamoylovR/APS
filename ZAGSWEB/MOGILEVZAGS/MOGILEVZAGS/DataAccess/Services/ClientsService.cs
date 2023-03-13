@@ -30,5 +30,22 @@ namespace MOGILEVZAGS.DataAccess.Services
         {
             return await _dbContext.Clients.ToListAsync();
         }
+
+        public async Task DeleteClientById(int id)
+        {
+            var clientToDelete = await _dbContext.Clients
+                .FirstOrDefaultAsync(item => item.Id == id);
+
+            if (clientToDelete is not null)
+            {
+                _dbContext.Clients.Remove(clientToDelete);
+
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                _logger.LogWarning("Trying to delete unexisting entity");
+            }
+        }
     }
 }

@@ -36,9 +36,10 @@ namespace MOGILEVZAGS.Pages.Client1
                 _logger.LogError("Exception  " + ex.ToString());
             }
         }
+
         public async Task OnPost(int id)
         {
-            var id_1 = 0;
+            await _clientService.DeleteClientById(id);
         }
     }
 }

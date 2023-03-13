@@ -9,5 +9,7 @@ namespace MOGILEVZAGS.DataAccess.Services
         public Task<List<Client>> GetMarriagedClientAsync();
 
         public Task<List<Client>> GetDivorcedClientAsync();
+
+        public Task DeleteClientById(int id);
     }
 }

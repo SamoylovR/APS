@@ -36,9 +36,15 @@ namespace MOGILEVZAGS.Pages.Employees
                 _logger.LogError("Exception  " + ex.ToString());
             }
         }
+
         public async Task OnPost(int id) 
         {
-            var id_1 = 0; 
+            var employeeToDelete = await _dbContext.Employees
+                .FirstOrDefaultAsync(item => item.Id == id);
+
+            _dbContext.Employees.Remove(employeeToDelete);
+
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
