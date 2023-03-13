@@ -11,8 +11,6 @@ namespace MOGILEVZAGS.DataAccess.Models
 
         public string Message { get; set; }
 
-        public virtual Client Client { get; set; }
-
-        public int ClientId { get; set; }
+        public string Email { get; set; }
     }
 }
