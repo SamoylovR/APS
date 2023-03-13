@@ -1,11 +1,13 @@
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MOGILEVZAGS.DataAccess;
 using MOGILEVZAGS.DataAccess.Models;
+using System.Security.Claims;
 
 namespace MOGILEVZAGS.Pages.Employees
 {
+    [Authorize(Policy = "MustBeAdmin")]
     public class IndexModel : PageModel
     {
         private readonly DBContext _dbContext;
@@ -20,6 +22,7 @@ namespace MOGILEVZAGS.Pages.Employees
         }
 
         public List<Employee> ListClients = new List<Employee>();
+
         public async Task OnGet()
         {
             try

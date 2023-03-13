@@ -13,17 +13,16 @@ namespace MOGILEVZAGS.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<UserEntity>()
-            //    .HasData(
-            //    new UserEntity
-            //    {
-            //        Id = 1,
-            //        UserName = "admin",
-            //        Emal = "admin@admin.com",
-            //        IsAdmin = true,
-            //        DeliveryAdress = "none",
-            //        PhoneNumber = "375(29)1111111"
-            //    });
+            modelBuilder.Entity<User>()
+                .HasData(
+                new User
+                {
+                    Id = 1,
+                    Login = "Admin",
+                    Password = "superGreatPassword",
+                    Email = "sashkoo@mail.ru",
+                    UserRole = Role.Admin,
+                });
 
             modelBuilder.Entity<Client>()
                 .HasData(
