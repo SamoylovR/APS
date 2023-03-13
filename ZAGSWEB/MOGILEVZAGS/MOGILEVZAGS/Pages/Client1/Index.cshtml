@@ -15,7 +15,6 @@
             <th>Телефон</th>
             <th>Дата создания заявки</th>
             <th>Тип заявки</th>
-            <th>Действие</th>
         </tr>
     </thead>
     <tbody>
@@ -28,12 +27,6 @@
                 <td>@item.Phone</td>
                 <td>@item.CreatedAt</td>
                 <th>@item.TypeOfOperation</th>
-                <td>
-                    <form method="post">
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        <input type="hidden" name="id" value="@item.Id">
-                    </form>
-                </td>
             </tr>
         }
     </tbody>
