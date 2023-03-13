@@ -47,6 +47,9 @@ namespace MOGILEVZAGS
             {
                 options.AddPolicy("MustBeAdmin",
                         policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+
+                options.AddPolicy("MustBeEmployee",
+                        policy => policy.RequireClaim(ClaimTypes.Role, "Employee"));
             });
 
             services.AddRazorPages();

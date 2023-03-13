@@ -18,8 +18,8 @@ namespace MOGILEVZAGS.DataAccess
                 new User
                 {
                     Id = 1,
-                    Login = "Admin",
-                    Password = "superGreatPassword",
+                    Login = "admin",
+                    Password = "admin",
                     Email = "sashkoo@mail.ru",
                     UserRole = Role.Admin,
                 });
